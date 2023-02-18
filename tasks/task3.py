@@ -19,8 +19,8 @@ print(x)
 '''
 x = int(input())
 x = x
-x = x + x
-x = x + x
+x = x
+x = x
 print(x)
 '''
 #Задание 4
@@ -51,10 +51,13 @@ def test(x,y):
 test(3,4)
 '''
 #Задание 6
+'''
 def fast_pow(x,n):
     s = 0
+    d = x
     for i in range(1, n-1):
-        y = x
+        x = s
+        y = d
         while x != 0:
             if x % 2 != 0:
                 s = s + y
@@ -66,5 +69,5 @@ def test(x,n):
     assert fast_pow(x,n) == x**n
     print("True")
 test(3,4)
-
+'''
 
