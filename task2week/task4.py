@@ -1,5 +1,5 @@
 # 4.1
-'''
+
 def generate_groups():
     for a in range(1, 9):
         yield f'ИВБО-0{a}-21'
@@ -21,7 +21,7 @@ groups = []
 for i in generate_groups():
     groups.append(i)
 print(groups)
-'''
+
 # 4.2
 '''
 from sys import stdout

@@ -3,12 +3,13 @@
 def ham_dist(a, b):
     return bin(a ^ b).count('1')
 
+
 def ham_dist_naive(a, b):
     a = bin(a)[2:]
     b = bin(b)[2:]
     ans = 0
     if len(a) > len(b):
-        b = '0' *  (len(a) - len(b)) + b
+        b = '0' * (len(a) - len(b)) + b
     elif len(b) > len(a):
         a = '0' * (len(b) - len(a)) + a
     print(a, b)
@@ -21,9 +22,8 @@ def ham_dist_naive(a, b):
 print(ham_dist(0b00110, 0b11000))
 print(ham_dist_naive(5, 150))
 '''
-
 # 5.2
-'''
+
 def decode_val(a):
     a = str(bin(a))[2:]
     a = '0' * (24 - len(a)) + a
@@ -45,7 +45,7 @@ a = [815608, 2064837, 2093080, 2063879, 196608, 2067983, 10457031, 1830912, 2067
 # print(decode_val(10457031))
 for i in a:
     print(decode_val(i))
-    '''
+
 # 5.3
 '''
 from functools import cache
@@ -64,7 +64,7 @@ def lev_dist(a, b, i, j):
 a, b = input(), input()
 print(lev_dist(a, b, len(a), len(b)))
 '''
-#5.4
+# 5.4
 '''
 from functools import cache
 
@@ -92,4 +92,3 @@ def lev_dist(a, b, i, j):
 
 print(lev_dist("столб", "слон", 5, 4))
 '''
-

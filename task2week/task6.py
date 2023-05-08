@@ -1,7 +1,7 @@
 import pandas as pd
 import random
 #6.1
-'''
+
 str = pd.read_csv("лаб666.csv")
 text = "Коллеги, " + str["2"][random.randint(0, 7)] + str["3"][random.randint(0, 7)]\
        + str["4"][random.randint(0, 7)] + str["5"][random.randint(0, 7)] + '\n'
@@ -16,7 +16,7 @@ for i in range(len_text):
     if abz >= 5:
         text += '\n'
 print(text)
-'''
+
 #6.2
 '''
 f = open("текст.txt", encoding='utf-8')
