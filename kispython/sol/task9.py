@@ -21,14 +21,19 @@ def transpose(A):
 
 
 def form(res):
+    rr = []
     for row in res:
-        row[0] = row[0].split('@')[0]
-        row[1] = row[1].split(':')[0]
-        row[1] = row[1].replace('1', 'да').replace('0', 'нет')
-        s = row[1][1]
+        r = []
+        r1 = row[0].split('@')[0]
+        r2 = row[1].split(':')[0]
+        r2 = r2.replace('1', 'да').replace('0', 'нет')
+        s = row[1].split(':')[1]
         s = s[2:5] + ' ' + s[5:8] + '-' + s[8:]
-        res.append(s)
-    return res
+        r.append(r1)
+        r.append(s)
+        r.append(r2)
+        rr.append(r)
+    return rr
 
 
 def main(x):

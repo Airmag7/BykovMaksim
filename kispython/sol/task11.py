@@ -1,5 +1,6 @@
 from struct import *
 
+
 FMT = dict(
     char='c',
     int8='b',
@@ -39,10 +40,10 @@ def parse_d(buf, offs):
     d1, offs = parse(buf, offs, 'double')
     d2, offs = parse(buf, offs, 'uint64')
     d3_size, offs = parse(buf, offs, 'uint16')
-    d3_offset, offs = parse(buf, offs, 'uint32')
+    d3_offs, offs = parse(buf, offs, 'uint32')
     d3 = []
     for _ in range(d3_size):
-        e_offs, offs = parse(buf, offs, 'uint16')
+        e_offs, d3_offs = parse(buf, d3_offs, 'uint16')
         val, _ = parse_e(buf, e_offs)
         d3.append(val)
     return dict(D1=d1, D2=d2, D3=d3), offs
@@ -73,11 +74,12 @@ def parse_a(buf, offs):
     a4, offs = parse(buf, offs, 'double')
     a5, offs = parse(buf, offs, 'int8')
     a6_size, offs = parse(buf, offs, 'uint16')
-    a6_offset, offs = parse(buf, offs, 'uint16')
+    a6_offs, offs = parse(buf, offs, 'uint16')
     a6 = []
     for _ in range(a6_size):
-        val, a6_offs = parse(buf, offs, 'char')
+        val, a6_offs = parse(buf, a6_offs, 'char')
         a6.append(val)
+    a6 = b''.join(a6).decode('utf-8')
     d_offset, offs = parse(buf, offs, 'uint32')
     a7, _ = parse_d(buf, d_offset)
     a8, offs = parse(buf, offs, 'uint32')
@@ -85,13 +87,12 @@ def parse_a(buf, offs):
 
 
 def main(stream):
-    return parse_a(stream, 4)[0]
+    return parse_a(stream, 3)[0]
 
 
-print(main(b'HUO\xc4$\xe5\xbf\x00bry\xb6=\xecCs?\xe3m;y\xf7>\x9e\x88\x80Y\xbf'
- b'\xea\xfc\x0bZ\xe9\xa4Zo\x00\x02\x000\x00\x00\x00\x87\xcb\x1e*Isf\xb8\xda'
- b'\xfc\xdf\x1b\xb8\xf7\xf2\xe8\x8a\xa2\xc0\xfe\xd5\xd3\xd4\xf6C'
- b'\xec\x15\x16\x1e\n5\xde6&\xac\x0baT\xdb6_r\xc5-j\x9b\xb7c\xa1\x87?Ej'
- b'\xdc\x1a9]\x9f\xb8\xb1\xd7\x9d\x85\x9b\xb5`W\x1aFH\xf4rX\x00\x86m\xf0'
- b'\x98\x99\x80(P\x002\x00A\x00P\x00_\x00n\xbf\xe2u\xe2q,2D\xe1\xb2\x11\xbeN'
- b'\xb5\xc4\xe6\x00\x05\x00\x00\x00}'))
+print(main(b'HUO\nn\xc2\xbf*(\x18\xb8\xc3D\xd4\x9d\x0e\xbf\xdea\x7f\x17\xacR\x00"\x00Y?'
+ b'\xee\x80D\xd1)\x13$)\x00\x02\x000\x00\x00\x00\x87\x9a\xb6#tdx\x88jm\xd2\xbdt'
+ b'\xf4\t\xe2^\xf8\xbeI\xbb\x80\xea\xf4\x7f\xec\xc2;\x15 \xdf \xfeG\xc6\x83\xc4'
+ b'R(\x8e\xfeG\x9f\\a\x01\xf5q\x8d\x9dkvI\xb1\xc967\xd7\xc3\x8d\xa1\xcdk^\x9e'
+ b'\xa1\xda#\x94\xd9\xf7\x95\xc4\xa2\xb6t\xcb\xb3\xb3\x1aTB\x002\x00A\x00P\x00'
+ b'_\x00n?\xc5\xdc\x92B\x197\xf8\x1a\x15\xcc\xaa(\x9c8h\x00\x05\x00\x00\x00}'))

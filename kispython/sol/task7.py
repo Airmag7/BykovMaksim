@@ -1,12 +1,13 @@
-def main(s):
-    L1 = s & 0x3ff
-    L2 = (s >> 2) & 0x2f
-    L3 = (s >> 6) & 0x1f
-    L4 = (s >> 7) & 0x0f
-    L5 = (s >> 13) & 0x1f
-    L6 = (s >> 14) & 0x1f
-    d = L4 | (L1 << 6) | (L6 << 8) | (L5 << 14) | (L3 << 15) | (L2 << 16)
-    return d
+def main(x):
+    x = (bin(int(str(x), 10))[2:])
+    x = '0' * (20 - len(x)) + x
+    u1 = x[18] + x[19]
+    u2 = x[14:18]
+    u3 = x[13]
+    u4 = x[7:13]
+    u5 = x[6]
+    u6 = x[0:6]
+    return str(int(u2 + u3 + u5 + u6 + u1 + u4, 2))
 
 
 print(main(358353))
